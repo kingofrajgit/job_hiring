@@ -1,4 +1,4 @@
-package com.getIoInTxt;
+package getIoInTxt;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -22,6 +22,5 @@ public class FileWriteDemo {
 
 		Files.write(path, content);
 
-	}
-
+	} 
 }

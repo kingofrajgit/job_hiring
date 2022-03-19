@@ -27,9 +27,7 @@ public class Databasecon {
 		return connection;
 	}
 
-	public static void connectionUtil() {
-
-	}
+	
 
 	
 }

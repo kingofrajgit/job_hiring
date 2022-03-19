@@ -1,4 +1,5 @@
 package userVerification;
+import java.io.FileWriter;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -24,6 +25,7 @@ public class UserDetails {
 	public static String branch = null;
 	
 	public UserDetails(String userName2, String dOB2, String collegeName2, String cource2, String branch2, String userMailId2, String userpass2) {
+		
 		userName = userName2;
 		DOB = dOB2;
 		collegeName = collegeName2;
@@ -43,11 +45,12 @@ public class UserDetails {
 				byte[] content = JobsDetails.getBytes();
 
 				Path path = Paths.get("UsersDetails.txt");
-
-				Files.write(path, content);
-			
+				FileWriter writer = new FileWriter("UsersDetails.txt"); 
+			//					Files.write(path, content);
+				writer.write(JobsDetails + System.lineSeparator());
+				System.out.println(JobsDetails );
 			}
-			System.out.println("All Details are inserted in this file" +" "+ "UsersDetails.txt");
+			
 		}
 		catch(Exception e) {
 			e.printStackTrace();
