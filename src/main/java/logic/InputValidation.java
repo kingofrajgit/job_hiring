@@ -1,6 +1,7 @@
-package userVerification;
+package logic;
 
 import java.util.Scanner;
+import DAO.UserDAO;
 
 public class InputValidation extends GetInput {
 
@@ -16,7 +17,7 @@ public class InputValidation extends GetInput {
 		try {
 			if (!userMailId.isBlank() && !userMailId.isEmpty() && !userPass.isBlank() && !userPass.isEmpty()) {
 				if (userMailId.contains("@gmail.com")) {
-					verify = UserDAO.cacheValidation(userMailId, userPass);
+					verify = UserDAO.checkValidation(userMailId, userPass);
 					System.out.println(" valid" + verify);
 				} else {
 					System.out.println("not valid");

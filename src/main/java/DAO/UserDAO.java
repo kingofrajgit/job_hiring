@@ -1,4 +1,4 @@
-package userVerification;
+package DAO;
 
 import java.sql.Connection;
 import java.sql.Statement;
@@ -6,9 +6,10 @@ import java.util.ArrayList;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-import dbcon.Databasecon;
-import jobDetails.JobDetails;
-import userVerification.InputValidation;
+import dataBaseConnection.Databasecon;
+import model.JobProfile;
+import logic.InputValidation;
+import model.UserDetails;
 
 public class UserDAO {
 
@@ -53,7 +54,7 @@ public class UserDAO {
 	}
 
 	@SuppressWarnings("finally")
-	public static int cacheValidation(String mailId, String password) throws Exception {
+	public static int checkValidation(String mailId, String password) throws Exception {
 		String query = null;
 		int result = 0;
 		StringBuilder querystr = new StringBuilder();
@@ -61,7 +62,8 @@ public class UserDAO {
 		Statement statement = connection.createStatement();
 		try {
 
-			querystr.append("select  userMailId,userPass from job_hiring where userMailId = ('").append(mailId).append("') or userPass = ('").append(password).append("')");
+			querystr.append("select  userMailId,userPass from job_hiring where userMailId = ('").append(mailId)
+					.append("') or userPass = ('").append(password).append("')");
 			query = querystr.toString();
 			ResultSet rs = statement.executeQuery(query);
 			while (rs.next()) {
@@ -76,6 +78,7 @@ public class UserDAO {
 		}
 
 	}
+
 	@SuppressWarnings("finally")
 	public static int cacheValidation2(String mailId, String password) throws Exception {
 		String query = null;
@@ -85,7 +88,8 @@ public class UserDAO {
 		Statement statement = connection.createStatement();
 		try {
 
-			querystr.append("select  userMailId,userPass from job_hiring where userMailId = ('").append(mailId).append("') and userPass = ('").append(password).append("')");
+			querystr.append("select  userMailId,userPass from job_hiring where userMailId = ('").append(mailId)
+					.append("') and userPass = ('").append(password).append("')");
 			query = querystr.toString();
 			ResultSet rs = statement.executeQuery(query);
 			while (rs.next()) {
@@ -99,46 +103,52 @@ public class UserDAO {
 			return result;
 		}
 	}
-		public static void getalldetails() throws Exception {
 
-			String query1 = null;
-			int t = 0;
-			StringBuilder querystr1 = new StringBuilder();
-			Connection con = Databasecon.getConnection();
+	public static void getalldetails() throws Exception {
 
-			try {
-				// Prepare SQL.
-				querystr1.append("select * from job_hiring");
+		
+		StringBuilder querystr1 = new StringBuilder();
+		
+		Connection con = Databasecon.getConnection();
+		String query1 = null;
 
-				query1 = querystr1.toString();
-				Statement statement = con.createStatement();
+		try {
+			// Prepare SQL.
+			querystr1.append("select * from job_hiring");
 
-				// Execute SQL.
-				ResultSet rs = statement.executeQuery(query1);
+			query1 = querystr1.toString();
+			Statement statement = con.createStatement();
 
-				// Get data from database.
-				ArrayList<UserDetails> jobFiles = new ArrayList<UserDetails>();
-				while (rs.next()) {
-					UserDetails userDetails = new UserDetails();
-					userDetails.setMailId(rs.getString("userMailId"));
-					userDetails.setPass(rs.getString("userPass"));
-					userDetails.setName(rs.getString("userName"));
-					userDetails.setDob(rs.getString("DOB"));
-					userDetails.setCollege_name(rs.getString("College_name"));
-					userDetails.setcource(rs.getString("cource"));
-					userDetails.setbranch(rs.getString("branch"));
+			// Execute SQL.
+			ResultSet rs = statement.executeQuery(query1);
+
+			// Get data from database.
+			ArrayList<UserDetails> jobFiles = new ArrayList<UserDetails>();
 			
-					jobFiles.add(userDetails);
-					userDetails.print(jobFiles);
-				}
+			while (rs.next()) {
+				
+				//object greation for userDetails class
+				UserDetails userDetails = new UserDetails();
+				
+				userDetails.setMailId(rs.getString("userMailId"));
+				userDetails.setPass(rs.getString("userPass"));
+				userDetails.setName(rs.getString("userName"));
+				userDetails.setDob(rs.getString("DOB"));
+				userDetails.setCollege_name(rs.getString("College_name"));
+				userDetails.setcource(rs.getString("cource"));
+				userDetails.setbranch(rs.getString("branch"));
 
-			} catch (Exception e) {
-
-				e.printStackTrace();
-			} finally {
-
-				con.close();
+				jobFiles.add(userDetails);
+				userDetails.print(jobFiles);
 			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		} finally {
+
+			con.close();
+		}
 
 	}
 

@@ -1,7 +1,7 @@
 package jobHiring;
 import java.util.Scanner;
 
-import userVerification.Querys;
+import DAO.UserDAO;
 public class LoginCheckTest {
 	
 	static Scanner sc = new Scanner(System.in);
@@ -13,7 +13,7 @@ public class LoginCheckTest {
 		System.out.println("===> Enter your password <===");
 		String password = sc.next();
 		int a = 0 ;
-		a = Querys.cacheValidation(emailId,password);
+		a = UserDAO.cacheValidation2(emailId,password);
 		if(a == 0) {
 			System.out.println(" Invalide email or password");
 		}

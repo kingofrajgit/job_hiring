@@ -1,8 +1,8 @@
 package jobHiring;
 
-import application.Application;
-import job.JobValidation;
-import job.Jobs;
+import logic.Application;
+import logic.JobValidation;
+import logic.Jobs;
 
 public class JobApplyTest {
 

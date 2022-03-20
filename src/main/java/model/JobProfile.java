@@ -1,4 +1,4 @@
-package jobDetails;
+package model;
 
 import java.io.IOException;
 import java.io.BufferedWriter;
@@ -9,8 +9,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
-public class JobDetails {
+public class JobProfile {
 	
 	private static int jobId = 0;
 
@@ -28,9 +29,9 @@ public class JobDetails {
 
 	private static String skills = null;
 
-	private static int salery = 0;
+	private static int salary = 0;
 
-	public JobDetails(int jobId,String companyName, String branch, String roll, int vacancy, String place, String date,
+	public JobProfile(int jobId,String companyName, String branch, String roll, int vacancy, String place, String date,
 			String skills, int salery) {
 		
 		this.jobId = jobId;
@@ -41,10 +42,10 @@ public class JobDetails {
 		this.place_Details = place;
 		this.localDate = date;
 		this.skills = skills;
-		this.salery = salery;
+		this.salary = salery;
 	}
 	
-	public JobDetails() {
+	public JobProfile() {
 		
 	}
 
@@ -90,7 +91,7 @@ public class JobDetails {
 
 	public static int getsalery() {
 
-		return salery;
+		return salary;
 	}
 
 	public void setBranch(String branch) {
@@ -135,26 +136,26 @@ public class JobDetails {
 
 	public void setSalery(int salery) {
 
-		this.salery = salery;
+		this.salary = salery;
 	}
 	
-	public void setJobId(int jobid) {
+	public  void setJobId(int jobid) {
 		this.jobId = jobid ;
 	}
 
-	public void print(JobDetails jobFile) throws IOException {
+	public void print(List<JobProfile> jobFiles2) throws IOException {
 		int  count = 0;
-//		for(JobDetails jobFile : jobFile2) {
+		for(JobProfile jobFiles : jobFiles2) {
 			count++;
-			String JobsDetails1 =  jobFile.companyName + "," +  jobFile.branch + "," +  jobFile.roll + "," +  jobFile.skills + ","
-					+  jobFile.place_Details + "," +  jobFile.salery + "," +  jobFile.vacancy;
+			String JobsDetails1 =  jobFiles.companyName + "," +  jobFiles.branch + "," +  jobFiles.roll + "," +  jobFiles.skills + ","
+					+  jobFiles.place_Details + "," +  jobFiles.salary + "," +  jobFiles.vacancy;
 
 			String path = "jobsDetails.txt";
-			System.out.println(jobFile+JobsDetails1);
+			System.out.println(jobFiles+JobsDetails1);
 			
 			appendUsingBufferedWriter(path, JobsDetails1,count);
 			
-//	}
+	}
 		if(count !=0) {
 		System.out.println("All Details are inserted in this file" + "jobsDetails.txt");
 		}
@@ -191,7 +192,7 @@ public class JobDetails {
 	}
 
 	public void setJobId(String string) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
@@ -200,14 +201,14 @@ public class JobDetails {
 		return jobId;
 	}
 
-	public void setValues(JobDetails jobFile) {
+	public void setValues(JobProfile jobFile) {
 		this.jobId = jobFile.jobId;
 		this.branch = jobFile.branch;
 		this.companyName = jobFile.companyName;
 		this.roll = jobFile.roll;
 		this.vacancy = jobFile.vacancy;
 		this.place_Details = jobFile.place_Details;
-		this.salery = jobFile.salery;
+		this.salary = jobFile.salary;
 		
 	}
 }

@@ -2,32 +2,38 @@ package jobHiring;
 
 import java.util.Scanner;
 
-import userVerification.GetInput;
-import userVerification.InputValidation;
-import userVerification.Querys;
+import logic.GetInput;
+import logic.InputValidation;
+import DAO.UserDAO;
+import model.UserDetails;
 
-public class InputValidationCheckTest {
+public class RegistrationCheckTest {
 
 	static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) throws Exception {
 
-		GetInput get = new InputValidation(null, null, null, null, null, null, null);
+		GetInput get = new InputValidation();
+
 		int option = 0;
 		String userMailId = null;
 		String userpass = null;
+		
+		//getting input using Scanner 
 		System.out.println("==> Enter your mailid");
 		userMailId = sc.next();
 		System.out.println("==> Enter your password");
 		userpass = sc.next();
+		
+		//calling check function
 		option = get.registerValitation(userMailId, userpass);
-		if (option == 1) {
+		if (option >= 1) {
 			System.out.println("This mailid or password is already prasent");
 		} else {
 			DeatilsRequired(userMailId, userpass);
 		}
 
-	} 
+	}
 
 	static void DeatilsRequired(String userMailId, String userpass) throws Exception {
 
@@ -42,8 +48,14 @@ public class InputValidationCheckTest {
 		String cource = sc.next();
 		System.out.println("5.Enter your branch");
 		String branch = sc.next();
-		InputValidation god = new InputValidation(userName, DOB, collegeName, cource, branch, userMailId, userpass);
-		int n = Querys.insert(god);
+		UserDetails details = new UserDetails(userName, DOB, collegeName, cource, branch, userMailId, userpass);
+		int n = UserDAO.insert(details);
+		
+		if(n==1) {
+			System.out.println("registertion successfull");
+		}else {
+			System.out.println("registertion unsuccessfull");
+		}
 	}
 
 }

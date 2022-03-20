@@ -1,4 +1,4 @@
-package userVerification;
+package logic;
 
 
   public abstract class GetInput {

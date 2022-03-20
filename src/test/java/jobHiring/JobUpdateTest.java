@@ -1,27 +1,33 @@
 package jobHiring;
 
 import java.util.Scanner;
-import job.JobsDAO;
-import job.Jobs;
-import jobDetails.JobDetails;
+import logic.JobValidation;
+import logic.Jobs;
+import model.JobProfile;
 
 public class JobUpdateTest {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Enter your companyName");
-		String companyName = sc.nextLine();
-		System.out.println("enter your perfered roll");
-		String roll = sc.nextLine();
+		Jobs job = new JobValidation();
+		JobProfile details = new JobProfile();
+
+		int jobId = 0;
+		int answer = 0;
+
+		System.out.println("enter your jobId");
+		jobId = sc.nextInt();
 		System.out.println("enter your vacancy");
-		String vacancy = sc.nextLine();
-		Jobs job = new JobsDAO();
-		int a = job.updateJob(companyName, roll,vacancy);
-		if (a == 0) {
-			System.out.println("Your job details is not deleted");
+		int vacancy = sc.nextInt();
+
+		details.setJobId(jobId);
+		details.setVacancy(vacancy);
+		answer = job.updateJob();
+		if (answer == 0) {
+			System.out.println("Your job details not update");
 		} else {
-			System.out.println("Your job detais is update successfull");
+			System.out.println("Your job details update successfull");
 		}
 
 	}

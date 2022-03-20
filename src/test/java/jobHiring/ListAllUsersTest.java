@@ -1,8 +1,8 @@
 package jobHiring;
 
-import userVerification.UserDAO;
+import DAO.UserDAO;
 
-public class AllUserList {
+public class ListAllUsersTest {
 
 	public static void main(String[] args) throws Exception {
 		UserDAO.getalldetails();
