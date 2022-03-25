@@ -13,14 +13,16 @@ public class InputValidation extends GetInput {
 
 	@SuppressWarnings("finally")
 	public int registerValitation(String userMailId, String userPass) throws Exception {
+		UsersInput obj = new UsersInput();
 		int verify = 1;
 		try {
 			if (!userMailId.isBlank() && !userMailId.isEmpty() && !userPass.isBlank() && !userPass.isEmpty()) {
 				if (userMailId.contains("@gmail.com")) {
 					verify = UserDAO.checkValidation(userMailId, userPass);
-					System.out.println(" valid" + verify);
+					
 				} else {
-					System.out.println("not valid");
+					System.out.println("Email id is not valid");
+					obj.validationCheckInput();
 				}
 			} else {
 				System.out.println("not valid");

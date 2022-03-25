@@ -7,6 +7,4 @@ package logic;
 
 	public abstract int registerValitation(String userMailid, String userpass) throws Exception;
 
-//	public abstract int registerValitation() throws Exception;
-
 }

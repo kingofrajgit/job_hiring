@@ -3,14 +3,15 @@ package logic;
 import java.sql.ResultSet;
 
 import model.JobProfile;
+import DAO.ApplicationDAO;
 import DAO.JobsDAO;
 
 public class JobValidation extends Jobs {
 
-	public void addJob(JobProfile obj) throws Exception {
+	public int addJob(JobProfile obj) throws Exception {
 
 		int result = JobsDAO.jobinsert(obj);
-		System.out.println(result);
+		return result;
 	}
 
 	@Override
@@ -29,17 +30,19 @@ public class JobValidation extends Jobs {
 	}
 
 	@Override
-	public void jobSerching(String skills) throws Exception {
+	public void jobSerching(JobProfile jobProfile) throws Exception {
 		
-			JobsDAO.jobSearchigSkills(skills);
+			JobsDAO.jobSearchigSkills(jobProfile);
 		
 	}
 
 	@Override
-	public void updateJobVacancy(int id) throws Exception {
-		
-			JobsDAO.jobUpdate1(id);
-			JobsDAO.getDetails2(id);
+	public int updateJobVacancy(int id) throws Exception {
+		int option	= 0;
+		option	=	JobsDAO.jobUpdate1(id);
+		if(option == 1)
+		option = ApplicationDAO.insert();
+	return option;
 	}
 
 }

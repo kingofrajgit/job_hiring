@@ -20,7 +20,7 @@ public class JobAddTest {
 		String companyName	=	sc.next();
 		System.out.println("4).Enter your roll");
 		String roll	 =	sc.next();
-		System.out.println("5).Enter your vacancy and place");
+		System.out.println("5).Enter your vacancy ");
 		int vacancy	=	sc.nextInt();
 		System.out.println("5).Enter your location");
 		String place	=	sc.next();

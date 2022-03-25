@@ -1,6 +1,7 @@
 package DAO;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.sql.ResultSet;
@@ -40,9 +41,9 @@ public class UserDAO {
 
 			querystr1.append(
 					"insert into job_hiring (userMailId,userPass,userName,DOB,college_Name,cource,branch ) values   ('")
-					.append(god2.userMailId).append("','").append(god2.userPass).append("','").append(god2.userName)
-					.append("','").append(god2.DOB).append("','").append(god2.collegeName).append("','")
-					.append(god2.cource).append("','").append(god2.branch).append("')");
+					.append(god2.getUserMailId()).append("','").append(god2.getUserPass()).append("','").append(god2.getUserName())
+					.append("','").append(god2.getDOB()).append("','").append(god2.getCollegeName()).append("','")
+					.append(god2.getCource()).append("','").append(god2.getBranch()).append("')");
 //			}
 			query1 = querystr1.toString();
 			t = exceqution(query1);
@@ -150,6 +151,39 @@ public class UserDAO {
 			con.close();
 		}
 
+	}
+
+	@SuppressWarnings("finally")
+	public static String getSkills(String userMailId) throws Exception {
+		
+		UserDetails obj = new UserDetails();
+		Connection con = Databasecon.getConnection();
+		String skills = null;
+		String query = null;
+
+		try {
+			// Prepare SQL.
+			query = "select branch from job_hiring where userMailId = ? ";
+
+			PreparedStatement stmt = con.prepareStatement(query);
+			stmt.setString(1, userMailId);
+			// Execute SQL.
+			ResultSet rs = stmt.executeQuery(query);
+			
+			while (rs.next()) {
+
+			skills = rs.getString("branch");
+
+			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		} finally {
+
+			con.close();
+			return skills;
+		}
 	}
 
 }

@@ -1,10 +1,14 @@
 package jobHiring;
 
+import org.junit.gen5.api.Test;
+
 public class MyApplicationsTest {
 
-	public static void main(String[] args) {
-		
-
-	}
+	 @Test
+     public void evaluatesExpression() {
+    
+        int sum = 1+2+3;
+ //       assertEquals(6, sum);
+     }
 
 }

@@ -13,23 +13,23 @@ import java.util.List;
 
 public class JobProfile {
 	
-	private static int jobId = 0;
+	private  int jobId = 0;
 
-	private static String companyName = null;
+	private  String companyName = null;
 
-	private static String branch = null;
+	private  String branch = null;
 
-	private static String roll = null;
+	private  String roll = null;
 
-	private static int vacancy = 0;
+	private  int vacancy = 0;
 
-	private static String place_Details = null;
+	private  String place_Details = null;
 
-	private static String localDate = null;
+	private  String localDate = null;
 
-	private static String skills = null;
+	private  String skills = null;
 
-	private static int salary = 0;
+	private  int salary = 0;
 
 	public JobProfile(int jobId,String companyName, String branch, String roll, int vacancy, String place, String date,
 			String skills, int salery) {
@@ -49,47 +49,47 @@ public class JobProfile {
 		
 	}
 
-	public static int getjobId() {
+	public  int getjobId() {
 
 		return jobId;
 	}
 
-	public static String getBranch() {
+	public  String getBranch() {
 
 		return branch;
 	}
 
-	public static String getcompanyName() {
+	public  String getcompanyName() {
 
 		return companyName;
 	}
 
-	public static String getroll() {
+	public  String getroll() {
 
 		return roll;
 	}
 
-	public static int getvacancy() {
+	public int getvacancy() {
 
 		return vacancy;
 	}
 
-	public static String getlocation_details() {
+	public  String getlocation_details() {
 
 		return place_Details;
 	}
 
-	public static String getfinish_date() {
+	public  String getfinish_date() {
 
 		return localDate;
 	}
 
-	public static String getskills() {
+	public  String getskills() {
 
 		return skills;
 	}
 
-	public static int getsalery() {
+	public  int getsalery() {
 
 		return salary;
 	}
@@ -102,6 +102,42 @@ public class JobProfile {
 	public void setCompany(String companyName) {
 		this.companyName = companyName;
 
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
+	public int getSalary() {
+		return salary;
+	}
+
+	public void setSalary(int salary) {
+		this.salary = salary;
+	}
+
+	public String getRoll() {
+		return roll;
+	}
+
+	public int getVacancy() {
+		return vacancy;
+	}
+
+	public String getPlace_Details() {
+		return place_Details;
+	}
+
+	public String getLocalDate() {
+		return localDate;
+	}
+
+	public String getSkills() {
+		return skills;
 	}
 
 	public void setRoll(String roll) {
@@ -143,29 +179,26 @@ public class JobProfile {
 		this.jobId = jobid ;
 	}
 
-	public void print(List<JobProfile> jobFiles2) throws IOException {
-		int  count = 0;
-		for(JobProfile jobFiles : jobFiles2) {
-			count++;
-			String JobsDetails1 =  jobFiles.companyName + "," +  jobFiles.branch + "," +  jobFiles.roll + "," +  jobFiles.skills + ","
-					+  jobFiles.place_Details + "," +  jobFiles.salary + "," +  jobFiles.vacancy;
+	@Override
+	public String toString() {
+		return "JobProfile [jobId=" + jobId + ", companyName=" + companyName + ", branch=" + branch + ", roll=" + roll
+				+ ", vacancy=" + vacancy + ", place_Details=" + place_Details + ", localDate=" + localDate + ", skills="
+				+ skills + ", salary=" + salary + "]";
+	}
+
+	public void print(JobProfile jobFiles) throws IOException {
+			String JobsDetails1 =  jobFiles.getcompanyName() + "	" +  jobFiles.branch + "	" +  jobFiles.roll + "	" +  jobFiles.skills + "	"
+					+  jobFiles.place_Details + "	" +  jobFiles.salary + "	" +  jobFiles.vacancy;
 
 			String path = "jobsDetails.txt";
-			System.out.println(jobFiles+JobsDetails1);
+			System.out.println(JobsDetails1);
 			
-			appendUsingBufferedWriter(path, JobsDetails1,count);
-			
-	}
-		if(count !=0) {
-		System.out.println("All Details are inserted in this file" + "jobsDetails.txt");
-		}
-		else {
-			System.out.println("All Details are inserted in this file" + "jobsDetails.txt");
-		}
+			appendUsingBufferedWriter(path, JobsDetails1);
+		
 		}
 	
 
-	private static void appendUsingBufferedWriter(String path, String content, int noOfLines) {
+	private static void appendUsingBufferedWriter(String path, String content) {
 		File file = new File(path);
 		FileWriter fr = null;
 		BufferedWriter br = null;
@@ -173,7 +206,7 @@ public class JobProfile {
 			// to append to file, you need to initialize FileWriter using below constructor
 			fr = new FileWriter(file, true);
 			br = new BufferedWriter(fr);
-			for (int i = 0; i < noOfLines; i++) {
+			for (int i = 0; i <1; i++) {
 				br.newLine();
 				// you can use write or append method
 				br.write(content);
@@ -209,6 +242,10 @@ public class JobProfile {
 		this.vacancy = jobFile.vacancy;
 		this.place_Details = jobFile.place_Details;
 		this.salary = jobFile.salary;
+		
+	}
+	public void print1(ArrayList<JobProfile> jobFiles) {
+		// TODO Auto-generated method stub
 		
 	}
 }

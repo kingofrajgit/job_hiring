@@ -3,6 +3,7 @@ package DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,15 +39,15 @@ public class JobsDAO {
 		try {
 			PreparedStatement stmt = con.prepareStatement(
 					"insert into hiring_companys (job_id,branch,companyName,roll ,vacancy,location_details,finish_date,skills,salery) values(?,?,?,?,?,?,?,?,?)");
-			stmt.setInt(1, JobProfile.getjobId());
-			stmt.setString(2, JobProfile.getBranch());
-			stmt.setString(3, JobProfile.getcompanyName());
-			stmt.setString(4, JobProfile.getroll());
-			stmt.setInt(5, JobProfile.getvacancy());
-			stmt.setString(6, JobProfile.getlocation_details());
-			stmt.setString(7, JobProfile.getfinish_date());
-			stmt.setString(8, JobProfile.getskills());
-			stmt.setInt(9, JobProfile.getsalery());
+			stmt.setInt(1, obj.getjobId());
+			stmt.setString(2, obj.getBranch());
+			stmt.setString(3, obj.getcompanyName());
+			stmt.setString(4, obj.getroll());
+			stmt.setInt(5, obj.getvacancy());
+			stmt.setString(6, obj.getlocation_details());
+			stmt.setString(7, obj.getfinish_date());
+			stmt.setString(8, obj.getskills());
+			stmt.setInt(9, obj.getsalery());
 			rows = stmt.executeUpdate();
 		} catch (Exception e) {
 
@@ -59,6 +60,7 @@ public class JobsDAO {
 
 	public static int jobDelete(int jobId) throws Exception {
 		
+		JobProfile obj = new JobProfile();
 		Connection con = Databasecon.getConnection();
 		String query = null;
 		int t = 0;
@@ -67,7 +69,7 @@ public class JobsDAO {
 		try {
 			query="delete  from hiring_companys where job_id	= ? ";
 			PreparedStatement stmt = con.prepareStatement(query);
-			stmt.setInt(1,JobProfile.getjobId());
+			stmt.setInt(1,obj.getjobId());
 			t = stmt.executeUpdate();
 		} catch (Exception e) {
 
@@ -79,7 +81,8 @@ public class JobsDAO {
 
 	@SuppressWarnings("finally")
 	public static int jobUpdate() throws Exception {
-
+		
+		JobProfile obj = new JobProfile();
 		Connection con = Databasecon.getConnection();
 		String query = null;
 		int t = 0;
@@ -87,8 +90,8 @@ public class JobsDAO {
 		try {
 			query = "update hiring_companys set vacancy = ? where job_id = ? ";
 			PreparedStatement stmt = con.prepareStatement(query);
-			stmt.setInt(1, JobProfile.getvacancy());
-			stmt.setInt(2, JobProfile.getjobId());
+			stmt.setInt(1, obj.getvacancy());
+			stmt.setInt(2, obj.getjobId());
 			t = stmt.executeUpdate();
 
 		} catch (Exception e) {
@@ -101,8 +104,8 @@ public class JobsDAO {
 
 	}
 
-	public static void jobSearchigSkills(String skills) throws Exception {
-
+	public static void jobSearchigSkills(JobProfile jobProfile) throws Exception {
+		
 		Connection con = Databasecon.getConnection();
 		String query = null;
 		int t = 0;
@@ -112,19 +115,16 @@ public class JobsDAO {
 			query = "select * from hiring_companys where skills = ? and vacancy > 0 ";
 
 			PreparedStatement stmt = con.prepareStatement(query);
-
-			stmt.setString(1, JobProfile.getskills());
+			stmt.setString(1, jobProfile.getskills());
 
 			// Execute SQL.
 			ResultSet rs = stmt.executeQuery();
-
+			 
 			// Get data from database.
 			ArrayList<JobProfile> jobFiles = new ArrayList<JobProfile>();
-
+			JobProfile jobFile1  = new JobProfile();
 			while (rs.next()) {
-
-				JobProfile jobFile = new JobProfile();
-
+				JobProfile jobFile  = new JobProfile();
 				jobFile.setJobId(rs.getInt("job_id"));
 				jobFile.setBranch(rs.getString("branch"));
 				jobFile.setCompany(rs.getString("companyName"));
@@ -134,10 +134,10 @@ public class JobsDAO {
 				jobFile.setLocalDate(rs.getString("finish_date"));
 				jobFile.setSkills(rs.getString("skills"));
 				jobFile.setSalery(rs.getInt("salery"));
-				jobFiles.add(jobFile);
-				jobFile.print(jobFiles);
+				jobFile1.print(jobFile);
 			}
-
+//			jobFile1.print(jobFiles);
+			
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -151,37 +151,45 @@ public class JobsDAO {
 
 		String query1 = null;
 		int t = 0;
-		StringBuilder querystr1 = new StringBuilder();
 		Connection con = Databasecon.getConnection();
 
 		try {
 			// Prepare SQL.
-			querystr1.append("select * from hiring_companys");
+			query1="select * from hiring_companys";
 
-			query1 = querystr1.toString();
+			
 			Statement statement = con.createStatement();
 
 			// Execute SQL.
 			ResultSet rs = statement.executeQuery(query1);
 
-			JobProfile jobFile = new JobProfile();
+			JobProfile jobFile = null;
 
 			// Get data from database.
 			List<JobProfile> jobFiles = new ArrayList<JobProfile>();
+			
 			while (rs.next()) {
 				jobFile = new JobProfile();
-				jobFile.setBranch(rs.getString("branch"));
-				jobFile.setCompany(rs.getString("companyName"));
-				jobFile.setRoll(rs.getString("roll"));
-				jobFile.setVacancy(rs.getInt("vacancy"));
-				jobFile.setPlace_Details(rs.getString("location_details"));
-				jobFile.setLocalDate(rs.getString("finish_date"));
-				jobFile.setSkills(rs.getString("skills"));
-				jobFile.setSalery(rs.getInt("salery"));
+				
+				String branch =rs.getString("branch");
+				String company =rs.getString("companyName");
+				String roll =rs.getString("roll");
+				int vacancy =rs.getInt("vacancy");
+				String place_details =rs.getString("location_details");
+				String skills =rs.getString("skills");
+				int salary =rs.getInt("salery") ;
+				
+				jobFile.setBranch(branch );
+				jobFile.setCompany(company);
+				jobFile.setRoll(roll);
+				jobFile.setVacancy(vacancy);
+				jobFile.setPlace_Details(place_details);
+				jobFile.setSkills(skills);
+				jobFile.setSalery(salary);
 				jobFiles.add(jobFile);
-				System.out.println(jobFiles);
+				jobFile.print(jobFile);
 			}
-			jobFile.print(jobFiles);
+			
 
 		} catch (Exception e) {
 
@@ -211,28 +219,31 @@ public class JobsDAO {
 		return t;
 	}
 
-	public static void getDetails2(int id) throws Exception {
-
-		String query1 = null;
-		int t = 0;
-		StringBuilder querystr1 = new StringBuilder();
+	public static int jobsCount() throws Exception {
+		JobProfile obj = new JobProfile();
 		Connection con = Databasecon.getConnection();
+		String query = null;
+		int t = 0;
 
 		try {
 			// Prepare SQL.
-			querystr1.append("select * from hiring_companys where job_id = '" + id + "'");
+			query = "select * from hiring_companys where skills = ? and vacancy > 0 ";
 
-			query1 = querystr1.toString();
-			Statement statement = con.createStatement();
+			PreparedStatement stmt = con.prepareStatement(query);
+
+			stmt.setString(1, obj.getskills());
 
 			// Execute SQL.
-			ResultSet rs = statement.executeQuery(query1);
-
+			ResultSet rs = stmt.executeQuery();
+			JobProfile jobFile = null;
+			 
 			// Get data from database.
 			ArrayList<JobProfile> jobFiles = new ArrayList<JobProfile>();
-			JobProfile jobFile = null;
+
 			while (rs.next()) {
+				t++;
 				jobFile = new JobProfile();
+				
 				jobFile.setJobId(rs.getInt("job_id"));
 				jobFile.setBranch(rs.getString("branch"));
 				jobFile.setCompany(rs.getString("companyName"));
@@ -243,11 +254,9 @@ public class JobsDAO {
 				jobFile.setSkills(rs.getString("skills"));
 				jobFile.setSalery(rs.getInt("salery"));
 				jobFiles.add(jobFile);
-				jobFile.setValues(jobFile);
-				ApplictionDAO.insert(jobFile);
-
+				jobFile.print1(jobFiles);
 			}
-
+			
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -255,7 +264,7 @@ public class JobsDAO {
 
 			con.close();
 		}
-
+		return t;
 	}
 
 }
