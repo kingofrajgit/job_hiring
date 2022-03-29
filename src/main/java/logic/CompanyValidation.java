@@ -5,7 +5,7 @@ import DAO.UserDAO;
 import model.CompanyProfile;
 
 public class CompanyValidation {
-	
+
 	@SuppressWarnings("finally")
 	public static int registerValitation(CompanyProfile obj) throws Exception {
 		int verify = 0;
@@ -13,9 +13,8 @@ public class CompanyValidation {
 		String password = obj.getPassword();
 		try {
 			if (!mailId.isBlank() && !mailId.isEmpty() && !password.isBlank() && !password.isEmpty()) {
-				if (mailId.contains("@")) {
+				if (mailId.contains("@") && password.length() >= 8 && password.length() <= 16) {
 					verify = CompanyDAO.checkValidation(obj);
-					System.out.println(" valid" + verify);
 				} else {
 					System.out.println("not valid");
 				}
@@ -29,7 +28,5 @@ public class CompanyValidation {
 			return verify;
 		}
 	}
-
-
 
 }

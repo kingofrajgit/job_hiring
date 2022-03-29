@@ -17,9 +17,9 @@ public class InputValidation extends GetInput {
 		int verify = 1;
 		try {
 			if (!userMailId.isBlank() && !userMailId.isEmpty() && !userPass.isBlank() && !userPass.isEmpty()) {
-				if (userMailId.contains("@gmail.com")) {
+				if (userMailId.contains("@gmail.com") && userPass.length() >= 8 && userPass.length() <= 16) {
 					verify = UserDAO.checkValidation(userMailId, userPass);
-					
+
 				} else {
 					System.out.println("Email id is not valid");
 					obj.validationCheckInput();

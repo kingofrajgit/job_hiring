@@ -48,10 +48,8 @@ public class UserDetails {
 				String JobsDetails = file.getUserName() + "," + file.getUserMailId() + "," + file.getDOB() + "," + file.getCollegeName() + ","
 					+ file.getCource() ;
 				byte[] content = JobsDetails.getBytes();
-
 				Path path = Paths.get("UsersDetails.txt");
-				FileWriter writer = new FileWriter("UsersDetails.txt"); 
-			//					Files.write(path, content);
+				FileWriter writer = new FileWriter("UsersDetails.txt"); 			//					Files.write(path, content);
 				writer.write(JobsDetails + System.lineSeparator());
 				System.out.println(JobsDetails );
 			}

@@ -186,15 +186,16 @@ public class JobProfile {
 				+ skills + ", salary=" + salary + "]";
 	}
 
-	public void print(JobProfile jobFiles) throws IOException {
-			String JobsDetails1 =  jobFiles.getcompanyName() + "	" +  jobFiles.branch + "	" +  jobFiles.roll + "	" +  jobFiles.skills + "	"
+	public void print(ArrayList<JobProfile> jobFile) throws IOException {
+			for(JobProfile jobFiles:jobFile) {
+		String JobsDetails1 =  jobFiles.getcompanyName() + "	" +  jobFiles.branch + "	" +  jobFiles.roll + "	" +  jobFiles.skills + "	"
 					+  jobFiles.place_Details + "	" +  jobFiles.salary + "	" +  jobFiles.vacancy;
 
 			String path = "jobsDetails.txt";
 			System.out.println(JobsDetails1);
 			
-			appendUsingBufferedWriter(path, JobsDetails1);
-		
+		//	appendUsingBufferedWriter(path, JobsDetails1);
+			}
 		}
 	
 
@@ -244,8 +245,9 @@ public class JobProfile {
 		this.salary = jobFile.salary;
 		
 	}
-	public void print1(ArrayList<JobProfile> jobFiles) {
-		// TODO Auto-generated method stub
+
+	public void printAllDetails(JobProfile jobFile) {
+		
 		
 	}
 }

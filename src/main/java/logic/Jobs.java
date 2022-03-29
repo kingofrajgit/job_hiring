@@ -14,4 +14,9 @@ public abstract class Jobs {
 
 	public abstract int updateJobVacancy(int applicationId) throws Exception;
 
+	public abstract int updateJobSkills(JobProfile details) throws Exception;
+
+	protected abstract int updateJobSalary(JobProfile details) throws Exception;
+	
+
 }

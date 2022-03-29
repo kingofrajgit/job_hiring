@@ -41,9 +41,10 @@ public class UserDAO {
 
 			querystr1.append(
 					"insert into job_hiring (userMailId,userPass,userName,DOB,college_Name,cource,branch ) values   ('")
-					.append(god2.getUserMailId()).append("','").append(god2.getUserPass()).append("','").append(god2.getUserName())
-					.append("','").append(god2.getDOB()).append("','").append(god2.getCollegeName()).append("','")
-					.append(god2.getCource()).append("','").append(god2.getBranch()).append("')");
+					.append(god2.getUserMailId()).append("','").append(god2.getUserPass()).append("','")
+					.append(god2.getUserName()).append("','").append(god2.getDOB()).append("','")
+					.append(god2.getCollegeName()).append("','").append(god2.getCource()).append("','")
+					.append(god2.getBranch()).append("')");
 //			}
 			query1 = querystr1.toString();
 			t = exceqution(query1);
@@ -107,30 +108,26 @@ public class UserDAO {
 
 	public static void getalldetails() throws Exception {
 
-		
 		StringBuilder querystr1 = new StringBuilder();
-		
+
 		Connection con = Databasecon.getConnection();
-		String query1 = null;
+		String query = null;
 
 		try {
 			// Prepare SQL.
-			querystr1.append("select * from job_hiring");
+			query = ("select * from job_hiring");
+			PreparedStatement statement = con.prepareStatement(query);
 
-			query1 = querystr1.toString();
-			Statement statement = con.createStatement();
-
-			// Execute SQL.
-			ResultSet rs = statement.executeQuery(query1);
-
+			ResultSet rs = statement.executeQuery();
+			UserDetails userDetails = null;
 			// Get data from database.
 			ArrayList<UserDetails> jobFiles = new ArrayList<UserDetails>();
-			
+
 			while (rs.next()) {
-				
-				//object greation for userDetails class
-				UserDetails userDetails = new UserDetails();
-				
+
+				// object greation for userDetails class
+				userDetails = new UserDetails();
+
 				userDetails.setMailId(rs.getString("userMailId"));
 				userDetails.setPass(rs.getString("userPass"));
 				userDetails.setName(rs.getString("userName"));
@@ -140,8 +137,9 @@ public class UserDAO {
 				userDetails.setbranch(rs.getString("branch"));
 
 				jobFiles.add(userDetails);
-				userDetails.print(jobFiles);
+
 			}
+			userDetails.print(jobFiles);
 
 		} catch (Exception e) {
 
@@ -155,7 +153,7 @@ public class UserDAO {
 
 	@SuppressWarnings("finally")
 	public static String getSkills(String userMailId) throws Exception {
-		
+
 		UserDetails obj = new UserDetails();
 		Connection con = Databasecon.getConnection();
 		String skills = null;
@@ -169,10 +167,10 @@ public class UserDAO {
 			stmt.setString(1, userMailId);
 			// Execute SQL.
 			ResultSet rs = stmt.executeQuery(query);
-			
+
 			while (rs.next()) {
 
-			skills = rs.getString("branch");
+				skills = rs.getString("branch");
 
 			}
 

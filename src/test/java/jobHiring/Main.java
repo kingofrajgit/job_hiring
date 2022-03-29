@@ -6,6 +6,7 @@ import logic.UsersInput;
 public class Main {
 
 	public static void main(String[] args) throws Exception {
+		while(true){
 		UsersInput obj = new UsersInput();
 		int a = obj.chosePrefernce();
 		if(a == 1) {
@@ -32,6 +33,14 @@ public class Main {
 			}
 			
 		}
+		int option = obj.terminateOrContinue();
+		if(option == 1) {
+			break;
+		}
+		else {
+			continue;
+		}
 	}
-
+		
+	}
 }

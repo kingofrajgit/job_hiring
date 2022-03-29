@@ -17,7 +17,7 @@ public class JobValidation extends Jobs {
 	@Override
 	public int deleteJob(int JobId) throws Exception {
 		int result = 0;
-		result	=	JobsDAO.jobDelete(JobId);
+		result = JobsDAO.jobDelete(JobId);
 		return result;
 
 	}
@@ -25,24 +25,38 @@ public class JobValidation extends Jobs {
 	@Override
 	public int updateJob() throws Exception {
 		int result = 0;
-		result	=	JobsDAO.jobUpdate();
+		result = JobsDAO.jobUpdate();
 		return result;
 	}
 
 	@Override
 	public void jobSerching(JobProfile jobProfile) throws Exception {
-		
-			JobsDAO.jobSearchigSkills(jobProfile);
-		
+
+		JobsDAO.jobSearchigSkills(jobProfile);
+
 	}
 
 	@Override
 	public int updateJobVacancy(int id) throws Exception {
-		int option	= 0;
-		option	=	JobsDAO.jobUpdate1(id);
-		if(option == 1)
-		option = ApplicationDAO.insert();
-	return option;
+		int option = 0;
+		option = JobsDAO.jobUpdate1(id);
+		if (option == 1)
+			option = ApplicationDAO.insert();
+		return option;
+	}
+
+	@Override
+	public int updateJobSkills(JobProfile details) throws Exception {
+		int result = 0;
+		result = JobsDAO.jobUpdateSkills(details);
+		return result;
+	}
+
+	@Override
+	protected int updateJobSalary(JobProfile details) throws Exception {
+		int result = 0;
+		result = JobsDAO.jobUpdateSalery(details);
+		return result;
 	}
 
 }
