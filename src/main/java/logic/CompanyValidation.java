@@ -1,7 +1,7 @@
 package logic;
 
-import DAO.CompanyDAO;
-import DAO.UserDAO;
+import dao.CompanyDAO;
+import dao.UserDAO;
 import model.CompanyProfile;
 
 public class CompanyValidation {

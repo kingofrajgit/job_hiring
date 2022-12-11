@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import logic.GetInput;
 import logic.InputValidation;
-import DAO.UserDAO;
+import dao.UserDAO;
 import model.UserDetails;
 
 public class RegistrationCheckTest {

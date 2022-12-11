@@ -1,4 +1,4 @@
-package DAO;
+package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -106,22 +106,18 @@ public class UserDAO {
 		}
 	}
 
-	public static void getalldetails() throws Exception {
-
-		StringBuilder querystr1 = new StringBuilder();
-
+	@SuppressWarnings("finally")
+	public static ArrayList<UserDetails> getAllDetails() throws Exception {
 		Connection con = Databasecon.getConnection();
 		String query = null;
-
+		ArrayList<UserDetails> jobFiles = new ArrayList<UserDetails>();
 		try {
 			// Prepare SQL.
-			query = ("select * from job_hiring");
+			query = ("SELECT userMailId,userName,DOB,college_Name,cource,branch FROM job_hiring");
 			PreparedStatement statement = con.prepareStatement(query);
 
 			ResultSet rs = statement.executeQuery();
 			UserDetails userDetails = null;
-			// Get data from database.
-			ArrayList<UserDetails> jobFiles = new ArrayList<UserDetails>();
 
 			while (rs.next()) {
 
@@ -129,7 +125,6 @@ public class UserDAO {
 				userDetails = new UserDetails();
 
 				userDetails.setMailId(rs.getString("userMailId"));
-				userDetails.setPass(rs.getString("userPass"));
 				userDetails.setName(rs.getString("userName"));
 				userDetails.setDob(rs.getString("DOB"));
 				userDetails.setCollege_name(rs.getString("College_name"));
@@ -139,7 +134,7 @@ public class UserDAO {
 				jobFiles.add(userDetails);
 
 			}
-			userDetails.print(jobFiles);
+//			userDetails.print(jobFiles);
 
 		} catch (Exception e) {
 
@@ -147,6 +142,7 @@ public class UserDAO {
 		} finally {
 
 			con.close();
+			return jobFiles;
 		}
 
 	}

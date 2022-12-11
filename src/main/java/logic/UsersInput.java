@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import logic.GetInput;
 import logic.InputValidation;
-import DAO.ApplicationDAO;
-import DAO.CompanyDAO;
-import DAO.JobsDAO;
-import DAO.UserDAO;
+import dao.ApplicationDAO;
+import dao.CompanyDAO;
+import dao.JobsDAO;
+import dao.UserDAO;
 import model.Application;
 import model.CompanyProfile;
 import model.JobProfile;
@@ -123,9 +123,9 @@ public class UsersInput {
 		System.out.println("choose your option..");
 		System.out.println("1. Job insert  ==> 1");
 		System.out.println("2. Job update  ==> 2");
-		System.out.println("3. Job delete  ==> 3");
-///		System.out.println("4. applications ==> 4");
-		System.out.println("5. Logout    	==> 4");
+		System.out.println("3. Job delete   ==> 3");
+		System.out.println("4. applications ==> 4");
+		System.out.println("5. Logout    	==> 5");
 		System.out.println();
 		int option = sc.nextInt();
 		switch (option) {
@@ -140,21 +140,22 @@ public class UsersInput {
 		case 3:
 			jobDelete(mailId);
 			break;
-//		case 4:
-//			ArrayList<Application> list = ApplicationDAO.FindId(mailId);
-//			for(Application rs : list) {
-//			System.out.println(rs.getJobid());
-//			}
-//			break;
 		case 4:
+			ArrayList<Application> list = ApplicationDAO.FindId(mailId);
+			
+			for(Application rs : list) {
+			System.out.println(rs.getJobid());
+			}
+			break;
+		case 5:
 			logout();
 			break;
 		}
 	}
 
 	private void choice(String mailId) throws Exception {
-		System.out.println("1. back            ==>4");
-		System.out.println("2. logged out      ==>5");
+		System.out.println("1. back            ==> 1");
+		System.out.println("2. logged out      ==> 2");
 		int option = sc.nextInt();
 		if( option == 1) {
 			companyVeaw(mailId);
@@ -175,13 +176,13 @@ public class UsersInput {
 		log.info("User date of birth :"+DOB);
 		System.out.println("3.Enter your college name");
 		String collegeName = sc.next();
-		log.info("User college :ame :"+DOB);
+		log.info("User college :ame :"+collegeName);
 		System.out.println("4.Enter your  cource");
 		String cource = sc.next();
-		log.info("User cource details :"+DOB);
+		log.info("User cource details :"+cource);
 		System.out.println("5.Enter your branch");
 		String branch = sc.next();
-		log.info("User branch details :"+DOB);
+		log.info("User branch details :"+branch);
 		UserDetails details = new UserDetails(userName, DOB, collegeName, cource, branch, userMailId, userPass);
 		System.out.println("!.....In progress");
 		int n = UserDAO.insert(details);
@@ -236,15 +237,25 @@ public class UsersInput {
 		int vacancy = sc.nextInt();
 		System.out.println("5).Enter your location");
 		String place = sc.next();
-		System.out.println("6).Enter lost entry date");
+		System.out.println("6).Enter last entry date");
 		String date = sc.next();
 		System.out.println("7).Enter the skils details");
 		String Skills = sc.next();
-		System.out.println("8).Enter the salery");
+		System.out.println("8).Enter the salary");
 		int salery = sc.nextInt();
+		
 
-		JobProfile obj = new JobProfile(jobId, companyName, branch, roll, vacancy, place, date, Skills, salery);
+		JobProfile obj = new JobProfile(jobId, companyName, branch, roll, vacancy, place, date, Skills, salery,mailId);
 		int t = obj1.addJob(obj);
+		if(t == 1) {
+			log.info("job successfully inserted");
+			System.out.println("==> job insert is successfully");
+			choice(mailId);
+		}else {
+			log.info("job unsuccessfully inserted");
+			System.out.println("==> job insert is unsuccessfully");
+			choice(mailId);
+		}
 		return t;
 	}
 
@@ -357,24 +368,42 @@ public class UsersInput {
 		return optioin ;
 	}
 	private int updateJobs1(String mailId) throws Exception {
+		
+		int a = 0;
 		log.info("job update profile");
 		System.out.println("===============================================");
-		System.out.println("job update profile");
-		System.out.println("1. skills update   ==>1");
-		System.out.println("2. vacancy update  ==>2");
-		System.out.println("3. salary update   ==>3");
-		System.out.println("4. back            ==>4");
-		System.out.println("5. logged out      ==>5");
+		System.out.println("      job update profile");
+		System.out.println("   -----------------------");
+		System.out.println("1. skills update   ==> 1");
+		System.out.println("2. vacancy update  ==> 2");
+		System.out.println("3. salary update   ==> 3");
+		System.out.println("4. back            ==> 4");
+		System.out.println("5. logged out      ==> 5");
 		int option =sc.nextInt();
 		switch(option){
 			case 1:
-				updateJobs2(mailId);
+				a =JobsDAO.DisplayJobs(mailId);
+				if(a >= 1) {
+					updateJobs2(mailId);
+				}else {
+					System.out.println(" Record is not found ....");
+				}
 				break;
 			case 2:
-				updateJobs(mailId);
+				a =JobsDAO.DisplayJobs(mailId);
+				if(a >= 1) {
+					updateJobs(mailId);
+				}else {
+					System.out.println(" Record is not found ....");
+				}
 				break;
 			case 3:
-				updateJobs3(mailId);
+				a =JobsDAO.DisplayJobs(mailId);
+				if(a >= 1) {
+					updateJobs3(mailId);
+				}else {
+					System.out.println(" Record is not found ....");
+				}
 				break;
 			case 4:
 				companyVeaw(mailId);
@@ -383,6 +412,7 @@ public class UsersInput {
 				logout();
 				break;
 		}
+		
 		return 0;
 		
 	}

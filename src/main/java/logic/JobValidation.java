@@ -1,10 +1,11 @@
 package logic;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import model.JobProfile;
-import DAO.ApplicationDAO;
-import DAO.JobsDAO;
+import dao.ApplicationDAO;
+import dao.JobsDAO;
 
 public class JobValidation extends Jobs {
 
@@ -30,10 +31,10 @@ public class JobValidation extends Jobs {
 	}
 
 	@Override
-	public void jobSerching(JobProfile jobProfile) throws Exception {
+	public ArrayList<JobProfile> jobSerching(JobProfile jobProfile) throws Exception {
 
-		JobsDAO.jobSearchigSkills(jobProfile);
-
+		ArrayList<JobProfile> jobFiles = JobsDAO.jobSearchigSkills(jobProfile);
+		return jobFiles;
 	}
 
 	@Override
@@ -53,7 +54,7 @@ public class JobValidation extends Jobs {
 	}
 
 	@Override
-	protected int updateJobSalary(JobProfile details) throws Exception {
+	public int updateJobSalary(JobProfile details) throws Exception {
 		int result = 0;
 		result = JobsDAO.jobUpdateSalery(details);
 		return result;

@@ -12,28 +12,30 @@ import java.util.Iterator;
 import java.util.List;
 
 public class JobProfile {
-	
-	private  int jobId = 0;
 
-	private  String companyName = null;
+	private int jobId = 0;
 
-	private  String branch = null;
+	private String companyName = null;
 
-	private  String roll = null;
+	private String branch = null;
 
-	private  int vacancy = 0;
+	private String roll = null;
 
-	private  String place_Details = null;
+	private int vacancy = 0;
 
-	private  String localDate = null;
+	private String place_Details = null;
 
-	private  String skills = null;
+	private String localDate = null;
 
-	private  int salary = 0;
+	private String skills = null;
 
-	public JobProfile(int jobId,String companyName, String branch, String roll, int vacancy, String place, String date,
-			String skills, int salery) {
-		
+	private int salary = 0;
+
+	private String mailId = null;
+
+	public JobProfile(int jobId, String companyName, String branch, String roll, int vacancy, String place, String date,
+			String skills, int salery, String mailId) {
+
 		this.jobId = jobId;
 		this.branch = branch;
 		this.companyName = companyName;
@@ -43,28 +45,32 @@ public class JobProfile {
 		this.localDate = date;
 		this.skills = skills;
 		this.salary = salery;
-	}
-	
-	public JobProfile() {
-		
+		this.mailId = mailId;
 	}
 
-	public  int getjobId() {
+	public JobProfile() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public String getMailId() {
+		return mailId;
+	}
+
+	public void setMailId(String mailId) {
+		this.mailId = mailId;
+	}
+
+	public int getjobId() {
 
 		return jobId;
 	}
 
-	public  String getBranch() {
+	public String getBranch() {
 
 		return branch;
 	}
 
-	public  String getcompanyName() {
-
-		return companyName;
-	}
-
-	public  String getroll() {
+	public String getroll() {
 
 		return roll;
 	}
@@ -74,22 +80,22 @@ public class JobProfile {
 		return vacancy;
 	}
 
-	public  String getlocation_details() {
+	public String getlocation_details() {
 
 		return place_Details;
 	}
 
-	public  String getfinish_date() {
+	public String getfinish_date() {
 
 		return localDate;
 	}
 
-	public  String getskills() {
+	public String getskills() {
 
 		return skills;
 	}
 
-	public  int getsalery() {
+	public int getsalery() {
 
 		return salary;
 	}
@@ -174,9 +180,9 @@ public class JobProfile {
 
 		this.salary = salery;
 	}
-	
-	public  void setJobId(int jobid) {
-		this.jobId = jobid ;
+
+	public void setJobId(int jobid) {
+		this.jobId = jobid;
 	}
 
 	@Override
@@ -186,52 +192,15 @@ public class JobProfile {
 				+ skills + ", salary=" + salary + "]";
 	}
 
-	public void print(ArrayList<JobProfile> jobFile) throws IOException {
-			for(JobProfile jobFiles:jobFile) {
-		String JobsDetails1 =  jobFiles.getcompanyName() + "	" +  jobFiles.branch + "	" +  jobFiles.roll + "	" +  jobFiles.skills + "	"
-					+  jobFiles.place_Details + "	" +  jobFiles.salary + "	" +  jobFiles.vacancy;
-
-			String path = "jobsDetails.txt";
-			System.out.println(JobsDetails1);
-			
-		//	appendUsingBufferedWriter(path, JobsDetails1);
-			}
-		}
 	
 
-	private static void appendUsingBufferedWriter(String path, String content) {
-		File file = new File(path);
-		FileWriter fr = null;
-		BufferedWriter br = null;
-		try {
-			// to append to file, you need to initialize FileWriter using below constructor
-			fr = new FileWriter(file, true);
-			br = new BufferedWriter(fr);
-			for (int i = 0; i <1; i++) {
-				br.newLine();
-				// you can use write or append method
-				br.write(content);
-			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				br.close();
-				fr.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
+	
 	public void setJobId(String string) {
-		
-		
+
 	}
 
 	public int getJobId() {
-		
+
 		return jobId;
 	}
 
@@ -243,11 +212,10 @@ public class JobProfile {
 		this.vacancy = jobFile.vacancy;
 		this.place_Details = jobFile.place_Details;
 		this.salary = jobFile.salary;
-		
+
 	}
 
 	public void printAllDetails(JobProfile jobFile) {
-		
-		
+
 	}
 }

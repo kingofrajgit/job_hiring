@@ -1,4 +1,4 @@
-package DAO;
+package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -136,14 +136,12 @@ public class ApplicationDAO {
 
 			PreparedStatement stmt = con.prepareStatement(query);
 			stmt.setString(1, mailId);
-			System.out.println(mailId);
 			ResultSet rs = stmt.executeQuery();
 			
 			Application obj = new Application();
 			while (rs.next()) {
 				obj = new Application();
 				int jobId=rs.getInt("job_id");
-				System.out.println(jobId);
 				obj.setJobid(jobId);
 				list.add(obj);
 			}

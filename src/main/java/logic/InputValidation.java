@@ -1,11 +1,9 @@
 package logic;
 
 import java.util.Scanner;
-import DAO.UserDAO;
+import dao.UserDAO;
 
 public class InputValidation extends GetInput {
-
-	static Scanner sc = new Scanner(System.in);
 
 	public InputValidation() {
 

@@ -1,0 +1,5 @@
+
+Rev	IT	SD	java	chennai	300000	55
+INFOSYS	IT	SD	java	chennai	30000	7
+finsurge	IT	SD	java	nagercoil	500000	9
+revature	IT	SD	Java	CHennai	30000	5

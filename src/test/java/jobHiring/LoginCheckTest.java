@@ -1,7 +1,7 @@
 package jobHiring;
 import java.util.Scanner;
 
-import DAO.UserDAO;
+import dao.UserDAO;
 public class LoginCheckTest {
 	
 	static Scanner sc = new Scanner(System.in);

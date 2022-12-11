@@ -42,23 +42,7 @@ public class UserDetails {
 	public UserDetails() {
 	
 	}
-	public void print(ArrayList<UserDetails> userFile) throws IOException {
-		try {
-			for (UserDetails file : userFile) {
-				String JobsDetails = file.getUserName() + "," + file.getUserMailId() + "," + file.getDOB() + "," + file.getCollegeName() + ","
-					+ file.getCource() ;
-				byte[] content = JobsDetails.getBytes();
-				Path path = Paths.get("UsersDetails.txt");
-				FileWriter writer = new FileWriter("UsersDetails.txt"); 			//					Files.write(path, content);
-				writer.write(JobsDetails + System.lineSeparator());
-				System.out.println(JobsDetails );
-			}
-			
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
+	
 	public void setMailId(String userMailId2) {
 		setUserMailId(userMailId2);
 		

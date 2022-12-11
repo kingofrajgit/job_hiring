@@ -43,7 +43,7 @@ public class Application {
 
 
 	public static void print(JobProfile jobFiles) {
-		String JobsDetails1 =  jobFiles.getcompanyName() + "	" +  jobFiles.getBranch() + "	" +  jobFiles.getroll() + "	" +  jobFiles.getskills() + "	"
+		String JobsDetails1 =  jobFiles.getCompanyName() + "	" +  jobFiles.getBranch() + "	" +  jobFiles.getroll() + "	" +  jobFiles.getskills() + "	"
 				+  "	" +  jobFiles.getSalary();
 
 		String path = "jobsDetails.txt";
@@ -59,7 +59,6 @@ private static void appendUsingBufferedWriter(String path, String content) {
 	FileWriter fr = null;
 	BufferedWriter br = null;
 	try {
-		// to append to file, you need to initialize FileWriter using below constructor
 		fr = new FileWriter(file, true);
 		br = new BufferedWriter(fr);
 		for (int i = 0; i <1; i++) {

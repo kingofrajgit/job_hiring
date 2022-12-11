@@ -1,5 +1,7 @@
 package jobHiring;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.gen5.api.Test;
 
 public class MyApplicationsTest {
@@ -8,7 +10,7 @@ public class MyApplicationsTest {
      public void evaluatesExpression() {
     
         int sum = 1+2+3;
- //       assertEquals(6, sum);
+       assertEquals(6, sum);
      }
 
 }
